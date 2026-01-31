@@ -23,4 +23,22 @@ X_train, X_temp, Y_train, Y_temp = train_test_split(X, Y, test_size=.2, random_s
 # Rest of the 20% is split amongst val and test
 X_val, X_test, Y_val, Y_test = train_test_split(X_temp, Y_temp, test_size=.5, random_state=42)
 
+#Scaling Data for Neural Networks
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_val_scaled   = scaler.transform(X_val)
+X_test_scaled  = scaler.transform(X_test)
+
+#MLRegressor Model: 
+
+mlp = MLPRegressor(random_state=42,
+                   hidden_layer_sizes=(10,5),
+                   max_iter=500,
+                   batch_size=1000,
+                   activation="relu",
+                   validation_fraction=0.2,
+                   early_stopping=True) 
+
+mlp.fit(X_train_scaled, Y_train)
 
