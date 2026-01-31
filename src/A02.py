@@ -33,9 +33,9 @@ X_test_scaled  = scaler.transform(X_test)
 #MLRegressor Model: 
 
 mlp = MLPRegressor(random_state=42,
-                   hidden_layer_sizes=(10,5),
-                   max_iter=500,
-                   batch_size=1000,
+                   hidden_layer_sizes=(10,8),
+                   max_iter=300,
+                   batch_size=10,
                    activation="relu",
                    validation_fraction=0.2,
                    early_stopping=True) 
@@ -72,4 +72,30 @@ plt.ylabel('Predicted')
 plt.title('Test Results')
 
 plt.savefig('figs/Test_Act_vs_Pred.png')
+plt.show()
+
+
+
+#MAE and R^2
+MAE_train = mean_absolute_error(Y_train, train_preds)
+MAE_test = mean_absolute_error(Y_test, test_preds)
+
+R2_train = r2_score(Y_train, train_preds)
+R2_test = r2_score(Y_test, test_preds)
+
+print("MAE_train= ", MAE_train)
+print("MAE_test= ", MAE_test)
+print("R2_train= ", R2_train)
+print("R2_test= ", R2_test)
+
+
+# Training Loss
+plt.figure(figsize=(8,5))
+plt.plot(mlp.loss_curve_)
+plt.xlabel("Epoch")
+plt.ylabel("Training Loss")
+plt.title("Training Loss vs Epoch (sklearn MLP)")
+plt.grid(True)
+
+plt.savefig('figs/Training_Loss.png')
 plt.show()
