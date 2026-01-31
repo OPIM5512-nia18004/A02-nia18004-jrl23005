@@ -1,0 +1,26 @@
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPRegressor
+from sklearn.metrics import r2_score, mean_absolute_error, mean_absolute_percentage_error
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Load California Housing dataset
+housing = fetch_california_housing(as_frame=True)
+
+#Establishing Target Variable
+df = housing.frame
+X = df.drop(columns= ['MedHouseVal'])
+Y = df['MedHouseVal']
+
+#Splitting into Train, Val, Test
+
+# 80% of data goes to training
+X_train, X_temp, Y_train, Y_temp = train_test_split(X, Y, test_size=.2, random_state=42)
+
+# Rest of the 20% is split amongst val and test
+X_val, X_test, Y_val, Y_test = train_test_split(X_temp, Y_temp, test_size=.5, random_state=42)
+
+
