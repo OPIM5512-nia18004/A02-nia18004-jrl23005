@@ -63,4 +63,13 @@ plt.show()
 
 
 # for Test: Actual vs. Predict Plot
+plt.figure(figsize=(8, 6))
+plt.scatter(x = Y_test, y = test_preds)
+plt.plot([0, 7], [0, 7], '--k') # 45 degree line
+plt.axis('tight')
+plt.xlabel('Actual')
+plt.ylabel('Predicted')
+plt.title('Test Results')
 
+plt.savefig('figs/Test_Act_vs_Pred.png')
+plt.show()
